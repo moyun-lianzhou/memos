@@ -1,0 +1,8 @@
+{
+  "files": [],
+  // //ts引用这两个文件配置
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}

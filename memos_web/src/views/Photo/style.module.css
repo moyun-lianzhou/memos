@@ -1,0 +1,17 @@
+.upload-button {
+  margin-bottom: 16px;
+}
+
+.masonry-grid {
+  min-height: 100vh;
+  display: flex;
+  margin-left: -8px;
+  /* 抵消列间距 */
+  width: auto;
+}
+
+.masonry-grid-column {
+  padding-left: 8px;
+  /* 列间距 */
+  background-clip: padding-box;
+}

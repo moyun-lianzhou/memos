@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4882639 */
+  src: url('iconfont.woff2?t=1743947415274') format('woff2'),
+       url('iconfont.woff?t=1743947415274') format('woff'),
+       url('iconfont.ttf?t=1743947415274') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 相册图标 */
+.icon-xiangce:before {
+  content: "\e6e2";
+}
+

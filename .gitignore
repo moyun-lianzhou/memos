@@ -1,0 +1,11 @@
+# common
+.vscode/*
+node_modules
+*.env
+
+# server
+upload/
+
+# client
+dist
+
