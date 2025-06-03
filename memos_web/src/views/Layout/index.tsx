@@ -12,7 +12,7 @@ const Layout: React.FC = () => {
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
           token: {
-            borderRadius: 16, // 圆角
+            borderRadius: 8, // 圆角
           },
           components: {
             Layout: {},

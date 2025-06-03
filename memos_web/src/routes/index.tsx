@@ -3,34 +3,41 @@ import Layout from '@/views/Layout/index'
 import Login from '@/views/Login/index'
 import Register from '@/views/Rigister/index'
 import { Route, Routes } from 'react-router';
-import Album from '@/views/Album';
-import AddAlbum from '@/views/Album/AddAlbum';
-import Photo from '@/views/Photo';
-import Home from '@/views/Home';
-import AlbumList from '@/views/Album/AlbumList';
-import EditAlbum from '@/views/Album/EditAlbum';
 import Upload from '@/components/Upload/index';
 import RequireAuth from '@/components/Auth/RequireAuth';
 import RedirectIfAuthenticated from '@/components/Auth/RedirectIfAuthenticated';
+import Home from '@/views/Home';
+import Album from '@/views/Album';
+import AlbumList from '@/views/Album/AlbumList';
+import AddAlbum from '@/views/Album/AddAlbum';
+import EditAlbum from '@/views/Album/EditAlbum';
+import Photo from '@/views/Photo';
 import PhotoList from '@/views/Photo/PhotoList';
 import AddPhoto from '@/views/Photo/AddPhoto';
+import Article from '@/views/Album';
+import ArticleList from '@/views/Article/ArticleList';
+import AddArticle from '@/views/Article/AddArticle';
+import EditArticle from '@/views/Article/EditArticle';
 
 
 const APP: React.FC = () => {
   return (
     <div>
       <Routes>
-
         {/* 需要登录才能访问的页面 */}
         <Route element={<RequireAuth />}>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path='article' element={<Article />}>
+              <Route index element={<ArticleList />} />
+              <Route path="addArticle" element={<AddArticle />} />
+              <Route path="editArticle/:_id" element={<EditArticle />} />
+            </Route>
             {/* 嵌套路由 */}
             <Route path="album" element={<Album />}>
               <Route index element={<AlbumList />} />
               <Route path="addAlbum" element={<AddAlbum />} />
               <Route path="editAlbum/:_id" element={<EditAlbum />} />
-              
             </Route>
             <Route path="photo" element={<Photo />} >
               <Route index element={<PhotoList />} />

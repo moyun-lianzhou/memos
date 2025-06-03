@@ -22,6 +22,10 @@ const HeaderBar: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode }) => {
         {
             key: 'album',
             label: <NavLink to="/album">相册</NavLink>
+        },
+        {
+            key: 'article',
+            label: <NavLink to="/article">记忆创作</NavLink>
         }
     ];
 
@@ -44,7 +48,7 @@ const HeaderBar: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode }) => {
     // 获取当前路径来确定哪个菜单项选中
     const getSelectedKey = () => {
         if (location.pathname.startsWith('/album')) return 'album';
-        if (location.pathname.startsWith('/photo')) return 'null';
+        if (location.pathname.startsWith('/article')) return 'article';
         return 'home';
     };
 

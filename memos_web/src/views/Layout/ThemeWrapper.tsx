@@ -15,9 +15,9 @@ const ThemeWrapper: React.FC<ThemeWrapperProps> = ({isDarkMode, setIsDarkMode,})
   const { token } = theme.useToken(); // 确保 useToken 在 ConfigProvider 作用域内
   
   return (
-    <Layout style={{ minHeight: '100vh', boxSizing: 'border-box', width:'100%'}}>
+    <Layout style={{ minHeight: '100vh', boxSizing: 'border-box', width:'100vw'}}>
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <Content className="flex py-2 w-full">
+      <Content className="flex py-2 w-full ">
         {/* 左侧留白：先收缩，minWidth 限制最小 */}
         <div className="hidden md:block shrink grow max-w-[240px] min-w-[50px]"/>
 
