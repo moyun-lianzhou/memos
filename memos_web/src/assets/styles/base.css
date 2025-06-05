@@ -2,14 +2,13 @@
 @import "tailwindcss"; 
 
 body {
-    overflow: auto !important;
     /* 解决modal弹出右边白屏问题, 可能破坏全局布局或其它组件的展示 */
-    height: 100%;
-    width: 100% !important;
+    /* height: 100%; */
+    /* width: 100% !important; */
 }
 
-html, body, #root {
-    height: 100%;
+html, #root {
+    /* height: 100%; */
   }
 
 

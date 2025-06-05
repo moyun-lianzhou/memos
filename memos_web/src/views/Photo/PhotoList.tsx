@@ -105,7 +105,7 @@ const Photo: React.FC = () => {
       </Empty>}
 
 
-      {photoList.length > 0 && <div>
+      {photoList.length > 0 && <div className="pl-4">
         <Flex gap="middle">
           <Button
             type="primary"

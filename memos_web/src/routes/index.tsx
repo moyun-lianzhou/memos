@@ -18,6 +18,7 @@ import Article from '@/views/Album';
 import ArticleList from '@/views/Article/ArticleList';
 import AddArticle from '@/views/Article/AddArticle';
 import EditArticle from '@/views/Article/EditArticle';
+import ArticleDetail from '@/views/Article/ArticleDetail';
 
 
 const APP: React.FC = () => {
@@ -30,6 +31,7 @@ const APP: React.FC = () => {
             <Route index element={<Home />} />
             <Route path='article' element={<Article />}>
               <Route index element={<ArticleList />} />
+              <Route path="detail/:_id" element={<ArticleDetail />} />
               <Route path="addArticle" element={<AddArticle />} />
               <Route path="editArticle/:_id" element={<EditArticle />} />
             </Route>

@@ -46,7 +46,7 @@ const Album: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '0px 60px' }}>
+    <div className='pl-4'>
 
       <Flex gap="middle">
         <Button
