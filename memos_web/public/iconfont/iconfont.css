@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4882639 */
-  src: url('iconfont.woff2?t=1743947415274') format('woff2'),
-       url('iconfont.woff?t=1743947415274') format('woff'),
-       url('iconfont.ttf?t=1743947415274') format('truetype');
+  src: url('iconfont.woff2?t=1749196507521') format('woff2'),
+       url('iconfont.woff?t=1749196507521') format('woff'),
+       url('iconfont.ttf?t=1749196507521') format('truetype');
 }
 
 .iconfont {
@@ -13,7 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 相册图标 */
+.icon-xiangce1:before {
+  content: "\e672";
+}
+
+.icon-dongwutouxiang-01:before {
+  content: "\e699";
+}
+
+.icon-dongwutouxiang-04:before {
+  content: "\e69b";
+}
+
 .icon-xiangce:before {
   content: "\e6e2";
 }

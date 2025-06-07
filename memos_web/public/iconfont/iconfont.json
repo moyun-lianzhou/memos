@@ -1,0 +1,37 @@
+{
+  "id": "4882639",
+  "name": "memos",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17456845",
+      "name": "相册",
+      "font_class": "xiangce1",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "23809716",
+      "name": "动物头像-01",
+      "font_class": "dongwutouxiang-01",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
+      "icon_id": "23809719",
+      "name": "动物头像-04",
+      "font_class": "dongwutouxiang-04",
+      "unicode": "e69b",
+      "unicode_decimal": 59035
+    },
+    {
+      "icon_id": "20266237",
+      "name": "相册",
+      "font_class": "xiangce",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    }
+  ]
+}

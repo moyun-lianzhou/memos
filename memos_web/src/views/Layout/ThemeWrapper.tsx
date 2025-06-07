@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Layout, theme } from "antd";
 import HeadRegion from "./HeadRegion";
 import SideRegion from "./SideRegion";
@@ -11,19 +11,33 @@ interface ThemeWrapperProps {
   setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ThemeWrapper: React.FC<ThemeWrapperProps> = ({isDarkMode, setIsDarkMode,}) => {
-  // 确保 useToken 在 ConfigProvider 作用域内
-  const { token } = theme.useToken();
-  const [collapsed, setCollapsed] = useState(false);
-  
+const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ isDarkMode, setIsDarkMode, }) => {
+  const { token } = theme.useToken(); // 确保 useToken 在 ConfigProvider 作用域内
+  const [collapsed, setCollapsed] = useState(false); // 控制侧边栏的折叠状态
+  const toggleButtonRef = useRef<HTMLButtonElement>(null); // head区域控制侧边栏状态按钮的Dom引用
+
   return (
-    <Layout style={{ minHeight: '100vh', boxSizing: 'border-box', width:'100vw'}}>
-      <SideRegion isDarkMode={isDarkMode} collapsed={collapsed} setCollapsed={setCollapsed} token={token}/>
+    <Layout style={{ minHeight: '100vh', boxSizing: 'border-box', width: '100vw' }}>
+      <HeadRegion
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        toggleButtonRef={toggleButtonRef}
+      />
       <Layout>
-      <HeadRegion collapsed={collapsed} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <ContenRegion collapsed={collapsed} token={token}/>
-      {/* <FooterRegion token={token}/> */}
+        <SideRegion
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          isDarkMode={isDarkMode}
+          token={token}
+          toggleButtonRef={toggleButtonRef}
+        />
+        <Layout>
+          <ContenRegion token={token} />
+        </Layout>
       </Layout>
+      {/* <FooterRegion token={token}/> */}
     </Layout>
   );
 };

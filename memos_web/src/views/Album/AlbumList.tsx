@@ -58,7 +58,9 @@ const Album: React.FC = () => {
         </Button>
 
         <Tag color="#87d068" style={{ height: 32, lineHeight: '32px', display: 'flex', alignItems: 'center' }}>
-          <i className='iconfont icon-xiangce' style={{ marginRight: 8 }}></i>
+          <svg className="w-5 h-5 mr-1"  aria-hidden="true">
+        <use xlinkHref="#icon-xiangce"></use>
+        </svg>
           共 {albumList.length} 张相册
         </Tag>
       </Flex>

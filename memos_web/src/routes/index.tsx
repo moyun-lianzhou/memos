@@ -7,6 +7,7 @@ import Upload from '@/components/Upload/index';
 import RequireAuth from '@/components/Auth/RequireAuth';
 import RedirectIfAuthenticated from '@/components/Auth/RedirectIfAuthenticated';
 import Home from '@/views/Home';
+import HomePhoto from '@/views/Home/HomePhotoDetail';
 import Album from '@/views/Album';
 import AlbumList from '@/views/Album/AlbumList';
 import AddAlbum from '@/views/Album/AddAlbum';
@@ -29,6 +30,7 @@ const APP: React.FC = () => {
         <Route element={<RequireAuth />}>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="homephoto/:_id" element={<HomePhoto />} />
             <Route path='article' element={<Article />}>
               <Route index element={<ArticleList />} />
               <Route path="detail/:_id" element={<ArticleDetail />} />
