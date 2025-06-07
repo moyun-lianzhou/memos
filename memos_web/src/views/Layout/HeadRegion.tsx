@@ -77,7 +77,7 @@ const HeaderRegion: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, setCol
         )}
       </div>
 
-      <div className="flex items-center mr-12">
+      <div className="flex items-center mr-6">
         {selectKey === "album" && (
           <div className="text-[#a0a0a0] py-2 px-2 rounded-xl cursor-pointer w-24 hover:bg-[#e0e0e0] text-center text-base">
             <UploadOutlined />
@@ -113,6 +113,7 @@ const HeaderRegion: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, setCol
                 <span className="mt-2 text-xs underline text-blue-500 cursor-pointer hover:text-blue-400">支持和反馈</span>
               </div>
             }>
+              {/* 头像 */}
             <svg className="w-12 h-12 rounded-full border-gray-400 hover:border-gray-200 hover:border" aria-hidden="true">
               <use xlinkHref="#icon-dongwutouxiang-04" />
             </svg>
