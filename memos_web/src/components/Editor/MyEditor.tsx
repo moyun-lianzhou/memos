@@ -16,6 +16,7 @@ import { RootState } from "@/redux/store";
 type InsertFnType = (url: string, alt: string, href: string) => void;
 
 const WangEditorPage: React.FC = () => {
+  // const editorRef = useRef<HTMLTextAreaElement>(null); // 文章内容
   const editorRef = useRef<HTMLDivElement>(null); // 文章内容
   const toolbarRef = useRef<HTMLDivElement>(null); // 工具栏
   //   const editorInstance = useRef<IDomEditor | null>(null);
@@ -23,13 +24,14 @@ const WangEditorPage: React.FC = () => {
   const [content, setContent] = useState("");
   const user = useSelector((state: RootState) => state.user);
 
+  
   useEffect(() => {
     const LANG = window.location.href.includes("lang=en") ? "en" : "zh-CN";
     i18nChangeLanguage(LANG);
-
+    
     const editorConfig: Partial<IEditorConfig> = {
       placeholder: "请输入内容...",
-      scroll: false,
+      scroll: false, // 开启滚动,
       MENU_CONF: {
         uploadImage: {
           customUpload: async (file: File, insertFn: InsertFnType) => {
@@ -47,7 +49,7 @@ const WangEditorPage: React.FC = () => {
             insertFn(res.data.data.url, file.name, "");
           },
           fieldName: "your-fileName",
-          base64LimitSize: 1 * 1024,
+          base64LimitSize: 1 * 1024 * 100, // 小于 100kb 使用 base64 格式上传
           // 单个文件的最大体积限制，默认为 2M
           maxFileSize: 10 * 1024 * 1024, // 1M
           // 最多可上传几个文件，默认为 100
@@ -71,21 +73,18 @@ const WangEditorPage: React.FC = () => {
         config: editorConfig,
       });
 
-      console.log("666", editor);
-
-      //   editorInstance.current = editor;
-
       if (toolbarRef.current) {
         createToolbar({
           editor,
           selector: toolbarRef.current,
           config: {
             // 工具栏配置
-            excludeKeys: ["group-video"],
+            excludeKeys: ["group-video", "fullScreen"],
           },
         });
       }
 
+      console.log(editor.getAllMenuKeys())
       // 将焦点（focus）设置到编辑器的末尾。
       const handleClick = (e: MouseEvent) => {
         if ((e.target as HTMLElement).id === "editor-text-area") {
@@ -104,6 +103,7 @@ const WangEditorPage: React.FC = () => {
   }, []);
 
   const navigate = useNavigate();
+  const {theme} = useSelector((state: RootState) => state.theme)
 
   const handleAddArticle = () => {
     const articleObj = { title, content };
@@ -121,60 +121,37 @@ const WangEditorPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="h-full w-[1200px] bg-white text-gray-800 rounded-lg relative">
-        {/* 返回导航 */}
-        <div className="border-b border-gray-200 pl-8 py-2">
-          <a
-            onClick={() => {
-              navigate("/article");
-            }}
-            className="text-blue-600 hover:underline"
-          >
-            &lt;&lt; 返回
-          </a>
-        </div>
 
+    <div className={`${theme}`}>
+      <div className="relative bg-gray-200 dark:bg-gray-800 w-screen h-screen overflow-hidden">
+        {/* 返回导航 */}
+        <div className="flex border-b border-gray-200 pl-6 py-2">
+          <span className="cursor-pointer hover:text-gray-500 dark:hover:text-gray-500" onClick={() => { navigate("/article") }}>&lt; 返回</span>
+          <div className="ml-8"><Button size="small" color="default">保存草稿</Button></div>
+          <Button className="ml-4" size="small" type="primary" onClick={handleAddArticle}>发布文章</Button>
+        </div>
         {/* 工具栏 editor-toolbar */}
-        <div
-          ref={toolbarRef}
-          className="border-b border-gray-200 mx-auto w-full bg-[#FCFCFC]"
-        ></div>
+        <div ref={toolbarRef} className="border border-gray-200"></div>
 
         {/* 编辑器内容 */}
-        <div className="h-full bg-gray-100 overflow-y-auto px-40">
-          {/* editor-container */}
-          <div className="w-full h-full mx-auto mt-8 mb-36 bg-white p-12 border border-gray-200 shadow-md">
-            {/* title-container */}
-            <div className="py-5 border-b border-gray-200">
-              <input
-                type="text"
-                placeholder="内容标题"
-                className="text-3xl w-full outline-none border-none"
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
+        <div className="bg-gray-200 dark:bg-gray-800 overflow-y-auto px-40 pt-8 pb-16 h-[calc(100vh-80px)]">
+          <div className="bg-white dark:bg-gray-500 p-12 border border-gray-200 shadow-md">
+            {/* 标题 */}
+            <div className="py-5 border-b border-gray-200 dark:text-white">
+              <input type="text" placeholder="内容标题" className="text-3xl w-full outline-none border-none" onChange={(e) => { setTitle(e.target.value); }} />
             </div>
-
-            {/* content-container */}
-            <div
-              id="editor-text-area"
-              ref={editorRef}
-              className="h-min-[100vh] h-min-60 mt-5 w-full overflow-hidden"
-            ></div>
+            {/* 正文 */}
+            <div id="editor-text-area" ref={editorRef} className="mt-4 min-h-[calc(100vh-80px)]"></div>
           </div>
         </div>
-        <div className="absolute bottom-0 bg-gray-300 w-full h-12 flex justify-center items-center">
-          <div className="pr-4">
-            <Button color="default">保存草稿</Button>
-          </div>
-          <Button type="primary" onClick={handleAddArticle}>
-            发布文章
-          </Button>
-        </div>
+        {/* <div className="absolute bottom-0 w-full h-12 flex justify-center items-center">
+          <div className="pr-4"><Button color="default">保存草稿</Button></div>
+          <Button type="primary" onClick={handleAddArticle}>发布文章</Button>
+        </div> */}
       </div>
     </div>
+
+
   );
 };
 

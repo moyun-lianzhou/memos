@@ -15,11 +15,12 @@ import EditAlbum from '@/views/Album/EditAlbum';
 import Photo from '@/views/Photo';
 import PhotoList from '@/views/Photo/PhotoList';
 import AddPhoto from '@/views/Photo/AddPhoto';
-import Article from '@/views/Album';
+import Article from '@/views/Article';
 import ArticleList from '@/views/Article/ArticleList';
 import AddArticle from '@/views/Article/AddArticle';
 import EditArticle from '@/views/Article/EditArticle';
 import ArticleDetail from '@/views/Article/ArticleDetail';
+import Collection from '@/views/Collection';
 
 
 const APP: React.FC = () => {
@@ -34,8 +35,11 @@ const APP: React.FC = () => {
             <Route path='article' element={<Article />}>
               <Route index element={<ArticleList />} />
               <Route path="detail/:_id" element={<ArticleDetail />} />
-              <Route path="addArticle" element={<AddArticle />} />
+              
               <Route path="editArticle/:_id" element={<EditArticle />} />
+            </Route>
+            <Route path='collection' element={<Collection />}>
+              <Route index element={<Collection />} />
             </Route>
             {/* 嵌套路由 */}
             <Route path="album" element={<Album />}>
@@ -49,6 +53,8 @@ const APP: React.FC = () => {
             </Route>
           </Route>
           <Route path="/upload" element={<Upload />} />
+          {/* 添加文章 */}
+          <Route path="/addArticle" element={<AddArticle />} />
         </Route>
 
         {/* 已登录用户不能访问登录页面 */}

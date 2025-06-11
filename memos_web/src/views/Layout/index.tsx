@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { theme, ConfigProvider } from "antd";
 import ThemeWrapper from "./ThemeWrapper";
 import { App } from "antd";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const Layout: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const redux_theme = useSelector((state: RootState) => state.theme).theme;
+  const [isDarkMode, setIsDarkMode] = useState(redux_theme === 'dark');
+  console.log('模式：', isDarkMode)
 
   return (
     <App>

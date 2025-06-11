@@ -63,10 +63,10 @@ const SideRegion: React.FC<ThemeWrapperProps> = ({ token, isDarkMode, collapsed,
 
   // 根据当前路由路径返回选中的菜单键名，用于设置菜单的选中状态。
   const getSelectedKey = () => {
-    console.log(collapsed)
+    console.log(location.pathname)
     if (location.pathname.startsWith("/album")) return "album";
     if (location.pathname.startsWith("/article")) return "memory";
-    return "home";
+    return "null";
   };
 
   return (

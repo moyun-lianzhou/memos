@@ -1,6 +1,7 @@
 import { theme, Layout, Switch, Button, Popover, } from "antd";
 import { useLocation, useNavigate } from "react-router";
 import { logout } from "@/redux/slices/userSlice";
+import { setTheme, cancelTheme } from "@/redux/slices/themeSlice";
 import { RootState } from "@/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserInfoAPI } from "@/apis/userAPI";
@@ -45,11 +46,18 @@ const HeaderRegion: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, setCol
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(cancelTheme());
     navigate("/login");
   };
 
   const handleClickAvatar = () => {
     console.log("点击头像");
+  };
+
+  const handleThemeChange = () => {
+    setIsDarkMode(!isDarkMode)
+    dispatch(setTheme({ theme: isDarkMode ? "light" : "dark" }));
+    console.log(localStorage.getItem("theme"))
   };
 
   return (
@@ -69,7 +77,7 @@ const HeaderRegion: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, setCol
           <Button
             ref={toggleButtonRef}
             type="text"
-            className="transition-transform duration-300 ease-in-out -translate-x-30"
+            className="transition-transform duration-300 ease-in-out -translate-x-34"
             icon={<UnorderedListOutlined />}
             onClick={() => setCollapsed(prev => !prev)}
             style={{ fontSize: "16px", width: 32, height: 32, marginRight: 16 }}
@@ -87,7 +95,7 @@ const HeaderRegion: React.FC<HeaderProps> = ({ isDarkMode, setIsDarkMode, setCol
         <div className="pr-6 ml-4">
           <Switch
             checked={!isDarkMode}
-            onChange={() => setIsDarkMode(!isDarkMode)}
+            onChange={handleThemeChange}
             checkedChildren="🌙"
             unCheckedChildren="☀️"
           />

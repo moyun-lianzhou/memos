@@ -33,10 +33,9 @@ const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ isDarkMode, setIsDarkMode, 
           token={token}
           toggleButtonRef={toggleButtonRef}
         />
-        {/* <Layout> */}
-          <div style={{overflow:'scroll'}}><ContenRegion token={token} /></div>
-          
-        {/* </Layout> */}
+        <Layout>
+          <ContenRegion token={token} />
+        </Layout>
       </Layout>
       {/* <FooterRegion token={token}/> */}
     </Layout>

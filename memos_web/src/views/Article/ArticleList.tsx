@@ -248,7 +248,7 @@ const App: React.FC = () => {
             className="cursor-pointer bg-gradient-to-r from-red-400 to-blue-500 
             text-gray-100 font-semibold rounded py-[5px] px-4 ml-4 
             hover:from-red-300 hover:to-blue-400 transition duration-300 ease-in-out"
-            onClick={() => navigate(`/article/addArticle`)}
+            onClick={() => navigate(`/addArticle`)}
             >
                 创作记忆
             </button>

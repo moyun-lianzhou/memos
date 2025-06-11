@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { loginAPI } from '@/apis/userAPI';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '@/redux/slices/userSlice';
+import { setTheme } from '@/redux/slices/themeSlice';
 
 const LoginComponent = () => {
   const [username, setUsername] = useState('tourist');
@@ -32,6 +33,7 @@ const LoginComponent = () => {
     const res = await loginAPI(data);
     const { token, user: { userId, username: name } } = res.data.data;
     dispatch(loginSuccess({ token, userId, username: name }));
+    dispatch(setTheme({ theme: 'dark' }))
     navigate('/', { replace: true });
   };
 
@@ -89,6 +91,7 @@ const LoginComponent = () => {
                   type="checkbox"
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                   checked
+                  onChange={(e) => setIsLoading(e.target.checked)} // 模拟记住密码的逻辑，实际应用中需要根据需求修改逻辑
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                   记住我

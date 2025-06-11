@@ -53,7 +53,7 @@ const Photo: React.FC = () => {
 
   const handleClearAlbum = () => {
     let confirmValue = ""; // 用户输入的值
-  
+
     Modal.confirm({
       title: '确认要清空整个相册吗？',
       content: (
@@ -74,14 +74,14 @@ const Photo: React.FC = () => {
           message.error('输入错误，操作已取消');
           throw new Error('用户输入错误'); // 阻止确认关闭
         }
-  
+
         await clearAllPhotoAPI(userId as string, albumId);
         setPhotoList([]);
         message.success('成功清空相册');
       }
     });
   };
-  
+
 
   const breakpointColumnsObj = {
     default: 4,
@@ -92,7 +92,7 @@ const Photo: React.FC = () => {
 
 
   return (
-    <>
+    <div>
       {photoList.length === 0 && <Empty
         image="/images/blank.png"
         styles={{ image: { height: 640, display: 'flex', justifyContent: 'center' } }}
@@ -105,39 +105,31 @@ const Photo: React.FC = () => {
       </Empty>}
 
 
-      {photoList.length > 0 && <div className="pl-4">
-        <Flex gap="middle">
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => navigate(`/photo/addPhoto/${albumId}`)}
-            className={styles['upload-button']}
-          >
-            上传图片
-          </Button>
+      {photoList.length > 0 &&
+        <div>
+          <Flex gap="middle">
+            <Button type="primary" icon={<PlusOutlined />} className={styles['upload-button']}
+              onClick={() => navigate(`/photo/addPhoto/${albumId}`)}
+            >
+              上传图片
+            </Button>
 
-          <Tag color="#87d068" style={{ height: 32, lineHeight: '32px', display: 'flex', alignItems: 'center' }}>
-            <i className='iconfont icon-xiangce' style={{ marginRight: 8 }}></i>
-            共 {photoList.length} 张图片
-          </Tag>
+            <Tag color="#87d068" style={{ height: 32, lineHeight: '32px', display: 'flex', alignItems: 'center' }}>
+              <i className='iconfont icon-xiangce' style={{ marginRight: 8 }}></i>
+              共 {photoList.length} 张图片
+            </Tag>
 
-          <Button
-            type="primary"
-            danger
-            icon={<DeleteOutlined />}
-            onClick={handleClearAlbum}
-          >
-            清空相册
-          </Button>
-        </Flex>
+            <Button danger type="primary" icon={<DeleteOutlined />} onClick={handleClearAlbum}>
+              清空相册
+            </Button>
+          </Flex>
 
-        <Masonry
+          {/* <Masonry
           breakpointCols={breakpointColumnsObj}
           className= {styles["masonry-grid"]}
           columnClassName= {styles["masonry-grid-column"]}
         >
           {photoList.map((item) => (
-
             <div key={item._id} style={{ marginBottom: 8 }}>
               <LazyPhotoItem
                 photo={item}
@@ -149,22 +141,35 @@ const Photo: React.FC = () => {
               />
             </div>)
           )}
-        </Masonry>
+        </Masonry> */}
 
-        {/* 只渲染一个编辑弹窗 */}
-        {editingPhoto && (
-          <EditPhoto
-            photo={editingPhoto}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={(open) => {
-              setIsModalOpen(open);
-              if (!open) setEditingPhoto(null);
-            }}
-            onSuccess={handleEditSuccess}
-          />
-        )}
-      </div>}
-    </>
+
+          <div className="columns-2 md:columns-4 sm:columns-3 lg:columns-5">
+            {photoList.map((item) => (
+              <div key={item._id} style={{ marginBottom: 8 }}>
+                <LazyPhotoItem
+                  photo={item}
+                  onEdit={() => { setEditingPhoto(item); setIsModalOpen(true); }}
+                  onDelete={() => handleDelete(item._id as string)}
+                />
+              </div>)
+            )}
+          </div>
+
+          {/* 只渲染一个编辑弹窗 */}
+          {editingPhoto && (
+            <EditPhoto
+              photo={editingPhoto}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={(open) => {
+                setIsModalOpen(open);
+                if (!open) setEditingPhoto(null);
+              }}
+              onSuccess={handleEditSuccess}
+            />
+          )}
+        </div>}
+    </div>
 
   );
 };

@@ -1,11 +1,28 @@
 /* 引入tailwindcss */
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
     margin: 0;
   /* 解决modal弹出右边白屏问题, 可能破坏全局布局或其它组件的展示 */
   /* height: 100%; */
   /* width: 100% !important; */
+}
+
+/* 解决富文本编辑器图片不居中问题 */
+img{
+  display: inline;
+}
+
+/* 更改wangEditor背景颜色全局变量 */
+:root {
+  --w-e-textarea-bg-color: #FFFFFF; /* 浅色模式默认背景 */
+  --w-e-textarea-color: #000000; /* 浅色模式默认文字颜色 */
+}
+/* 深色模式 */
+:root .dark {
+  --w-e-textarea-bg-color: #6A7282;
+  --w-e-textarea-color: #ffffff; /* 浅色模式默认文字颜色 */
 }
 
 .icon {
